@@ -20,22 +20,22 @@ export PASSWORD={your password}
 ### 3. Insert Data into MySQL
 To insert rows into the existing table without cleaning it, run:
 ```commandline
-python3 app.py -c 'False'
+python3 main.py -c 'False'
 ```
 or
 ```commandline
-python3 app.py --clean_table 'False'
+python3 main.py --clean_table 'False'
 ```
 
 To clean the table before adding new rows, run:
 ```commandline
-python3 app.py
+python3 main.py
 ```
 or 
 ```commandline
-python3 app.py -c 'True'
+python3 main.py -c 'True'
 ```
 or
 ```commandline
-python3 app.py --clean_table 'True'
+python3 main.py --clean_table 'True'
 ```
