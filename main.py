@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO, format='%(levelname)-5s [%(module)s - %(
 
 
 def main(connection, files):
-    if args.clean_table:
+    if args.clean_table == 'True':
         logging.info('Deleting all rows in the table.')
         delete_rows(connection)
 
