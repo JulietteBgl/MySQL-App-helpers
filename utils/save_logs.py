@@ -35,7 +35,7 @@ def insert_logs(db_connection, log):
         db_connection.commit()
         nb_row_inserted += 1
     except Error as e:
-        logging.error(f"Not possible insert log {log}: {e}")
+        logging.error(f"Not possible insert log {log['id']}: {e}")
     if db_connection.is_connected():
         cursor.close()
     return nb_row_inserted
