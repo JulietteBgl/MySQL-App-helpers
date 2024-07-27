@@ -2,6 +2,13 @@ import json
 
 
 def format_log(log):
+    """
+    Convert the input log into a dictionary format suitable for use with Python functions.
+    :param log:
+        The input log that needs to be formatted.
+    :return: dict
+        A dictionary representing the formatted log.
+    """
     items = log.split('|')
     logs_transformed = {}
 
@@ -15,6 +22,14 @@ def format_log(log):
 
 
 def is_expected_format(log):
+    """
+    Validate whether the given log dictionary adheres to the expected format for table insertion.
+
+    :param log: dict
+        A dictionary representing a formatted log entry.
+    :return: bool
+        Returns True if the log format meets the expected criteria; otherwise, returns False.
+    """
     keys = ['id', 'therapeutic_area', 'created_at', 'site']
     sub_keys = ['site_name', 'site_category']
     if (

@@ -8,7 +8,8 @@ from variables import ID, THERAPEUTIC_AREA, CREATED_AT, SITE_NAME, SITE_CATEGORY
 
 def connect_to_database(database):
     """
-    Create the connection to the MySQL Database. Host, user and password come from environment variables.
+    Create the connection to the MySQL Database.
+    Host, user and password come from environment variables.
     :param database: str
         Name of the database
     :return: MySQL connector
@@ -68,7 +69,8 @@ def table_exists(connection, table_name):
 
 def initialise_schema(connection):
     """
-    Create an empty table with the provided schema.
+    Create empty output table with the provided schema.
+    :param connection: MySQL connector
     """
     query = f"""CREATE TABLE {TABLE_NAME}(
        {ID} varchar(100),
@@ -91,14 +93,16 @@ def initialise_schema(connection):
 def delete_rows(connection):
     """
     Clean the table before inserting new data.
+    :param connection: MySQL connector
     """
     query = f"""DELETE FROM {TABLE_NAME}"""
-    try:
-        cursor = connection.cursor()
-        cursor.execute(query)
-        connection.commit()
-    except Error as e:
-        logging.error(f"Not possible to delete rows from table {TABLE_NAME}: {e}")
-    if connection.is_connected():
-        cursor.close()
+    if table_exists(connection, TABLE_NAME):
+        try:
+            cursor = connection.cursor()
+            cursor.execute(query)
+            connection.commit()
+        except Error as e:
+            logging.error(f"Not possible to delete rows from table {TABLE_NAME}: {e}")
+        if connection.is_connected():
+            cursor.close()
     return
