@@ -3,7 +3,7 @@ import os
 from utils.clean_logs import format_log, is_expected_format
 from utils.get_args import args
 from utils.mysql import connect_to_database, delete_rows
-from save_logs import insert_logs
+from utils.save_logs import insert_logs
 from variables import DATABASE_NAME, LOGS_FOLDER_NAME
 import logging
 
