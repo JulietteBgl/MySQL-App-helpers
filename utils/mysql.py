@@ -101,6 +101,10 @@ def initialise_schema(connection):
     Create empty output table with the provided schema.
     :param connection: MySQL connector
     """
+    if connection is None:
+        logging.info("Database connection is not established")
+        return False
+
     query = f"""CREATE TABLE {TABLE_NAME}(
        {ID} varchar(100),
        {THERAPEUTIC_AREA} varchar(25),
@@ -124,6 +128,10 @@ def delete_rows(connection):
     Clean the table before inserting new data.
     :param connection: MySQL connector
     """
+    if connection is None:
+        logging.info("Database connection is not established")
+        return False
+
     query = f"""DELETE FROM {TABLE_NAME}"""
     if table_exists(connection, TABLE_NAME):
         try:
