@@ -1,8 +1,9 @@
 import os
 
+from queries import oncology_specialisation_rate, list_of_sites
 from utils.format_logs import format_log, is_expected_format
 from utils.get_args import args
-from utils.mysql import connect_to_database, delete_rows
+from utils.mysql import connect_to_database, delete_rows, run_query
 from utils.save_logs import insert_logs
 from variables import DATABASE_NAME, LOGS_FOLDER_NAME
 import logging
@@ -47,6 +48,10 @@ if __name__ == "__main__":
     try:
         nb_rows = main(db_connection, json_files)
         logging.info(f'Inserted {nb_rows} rows out of {len(json_files)}.')
+        logging.info('### Oncology specialisation rate per Academic site: ###')
+        run_query(db_connection, oncology_specialisation_rate)
+        logging.info('### List of sites with at least 10 trials during the 14 days: ###')
+        run_query(db_connection, list_of_sites)
     except Exception as e:
         logging.error(f"Exception occurred in main function: {e}")
     finally:

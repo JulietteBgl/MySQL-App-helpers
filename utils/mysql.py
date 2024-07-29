@@ -33,6 +33,35 @@ def connect_to_database(database):
         return None
 
 
+def run_query(connection, query):
+    """
+    Checks if a table exists.
+    :param connection: MySQL connector
+    :param table_name: str
+        Name of the table we want to check the existence
+    :return: bool
+        True if the table exists, False otherwise
+    """
+
+    if connection is None:
+        logging.info("Database connection is not established")
+        return False
+
+    try:
+        cursor = connection.cursor()
+        cursor.execute(query)
+        result = cursor.fetchall()
+        print(result)
+
+    except Error as e:
+        logging.error(f"Error: {e}")
+        return False
+
+    finally:
+        if connection.is_connected():
+            cursor.close()
+
+
 def table_exists(connection, table_name):
     """
     Checks if a table exists.
